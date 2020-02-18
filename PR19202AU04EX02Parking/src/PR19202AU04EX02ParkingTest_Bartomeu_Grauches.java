@@ -5,7 +5,6 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 	
 	static Scanner scanner = new Scanner(System.in);
 	static ArrayList<PR19202AU04EX02Parking_Bartomeu_Grauches> plases = new ArrayList<>();
-	PR19202AU04EX02Parking_Bartomeu_Grauches cls = new PR19202AU04EX02Parking_Bartomeu_Grauches();
 	
 	
 	private static int showMenu() {
@@ -21,15 +20,22 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 		return youChoose;
 	}
 	
-	private static void menu() {
+	private static void menu(PR19202AU04EX02Parking_Bartomeu_Grauches objeto) {
 		boolean Salir = false;
 		while (Salir == false) {
 			int opcion = showMenu();
 			switch (opcion) {
 			
 				case 1:
-					System.out.println("Omplir parking a partir de fitxer*");
-					break;
+					System.out.println("-----------------------LLEGINT----MATICULES--------------------");
+					try {
+						objeto.llegirMatricules("");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						break;
+
 				
 				case 2:
 					System.out.println("Entrar Cotxe");
@@ -62,18 +68,11 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 		}
 	}
 	
-	private static void omplirParking() {
-		plases.add();
-	}
-	
-	private static void entrarCotxe() {
-		
-	}
-	
-	
-
 	public static void main(String[] args) {
-		menu();
+		PR19202AU04EX02Parking_Bartomeu_Grauches parking = new PR19202AU04EX02Parking_Bartomeu_Grauches(20,10);
+		menu(parking);
+		
+		
 		
 	}
 
