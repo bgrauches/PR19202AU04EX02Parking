@@ -11,31 +11,39 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 	static ArrayList<String> plases_noDiscp = new ArrayList<String>();
 	static ArrayList<String> plases_discapacitats = new ArrayList<String>();
 	
+	int totalArray = llista_matricules.size();
+	
 	//numero de plaçes de discapacitats, no_discapacitats i total
-	int pcar = plases_noDiscp.size();
-	int pdis = plases_discapacitats.size();
-	int plases = pcar + pdis;
+	int pNoDisc;
+	int pDisc;
+	int plasesTotals = pNoDisc + pDisc;
+	
+	//metode per comprovar si matricula donada es vàlida corresponent al patró [0-9]{4}[A-Z]{3}.
+	private static boolean comporovarMatricula(String matricula) {
+			boolean matriculaOK = matricula.matches("[0-9]{4}[A-Z]{3}");
+			return matriculaOK;
+	}
+	
+	private static void enterGarrulo() {
+		
+	}
  
 	
 	public PR19202AU04EX02Parking_Bartomeu_Grauches(int places_no_discapacitats, int places_discapacitats) { // En teoria ha de ser public Parking només
-		this.pcar = places_no_discapacitats;
-		this.pdis = places_discapacitats;
+		this.pNoDisc = places_no_discapacitats;
+		this.pDisc= places_discapacitats;
 	}
 	
-	//Introudim el path de l'arxiu per teclat i els String del document se guarden a l'arrayList matricules
+	//mètode on agafa el path de l'arxiu a llegir, comprova la maticula mijançant el mètode comporovarMatricula i l'afegeix a l'arrayList  llista_matricules
 	public void llegirMatricules(String path) throws Exception{
 		
-		System.out.println("Escriu el path del txt de les matricules");
-		String filePathRead = escriu.next();
-		
-		
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(filePathRead));	
+			BufferedReader bf = new BufferedReader(new FileReader(path));	
 			String linia;
 			//Mentres hi hagi linies, afegeix linies
 			while ((linia=bf.readLine()) != null) {
 				if(comporovarMatricula(linia)==false) {
-					System.out.println("ALERTA =====> Matrícula " + linia + "incorrecte.");
+					System.out.println("ALERTA =====> Matrícula " + linia + " incorrecte.");
 				}
 				llista_matricules.add(linia);
 				System.out.println(llista_matricules); 							//PER COMPROVAR MEM SI LES GUARDA---------------------------------------------------------------------------------
@@ -47,12 +55,6 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 	}
 	
-	//metode per comprovar si matricula donada per teclat es vàlida corresponent al patró [0-9]{4}[A-Z]{3}
-	private static boolean comporovarMatricula(String matricula) {
-		boolean matriculaOK = matricula.matches("[0-9]{4}[A-Z]{3}");
-		return matriculaOK;
-		
-	}
 	
 	public int entraCotxe(String matricula) throws Exception{ //afegeix 1 cotxe a les places
 		int a = 0;
@@ -62,16 +64,17 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 		try {
 			if(matriculaOK == true) {
-				if(llista_matricules.contains(matricula)) {
+				if(llista_matricules.contains(m)) {
 					System.out.println("El cotxe ja està al parking, no pot entrar.");
-				} else if(llista_matricules.contains(matricula)==false) {
-					llista_matricules.add(matricula);
-					plases_noDiscp.add(matricula);
+				} else if(llista_matricules.contains(m)==false) {
+					llista_matricules.add(m);
+					plases_noDiscp.add(m);
 					this.tipusPlaces = TipusPlacesParking.No_Discapacitat;
-					System.out.println("El cotxe amb matricula " + matricula + " ha entrat al parking.");
+					System.out.println("El cotxe amb matricula " + m + " ha entrat al parking.");
+					System.out.println(llista_matricules);
 				}
 			} else {
-				System.out.println("ALERTA =====> Matrícula " + matricula + "incorrecte.");
+				System.out.println("ALERTA =====> Matrícula " + m + " incorrecte.");
 			}
 		} catch (Exception w){
 			System.out.println("ALERTA =====> Parking per no discapacitats ple.");
@@ -89,19 +92,19 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 		try {
 			if(matriculaOK == true) {
-				if(llista_matricules.contains(matricula)) {
+				if(llista_matricules.contains(m)) {
 					System.out.println("El cotxe ja està al parking, no pot entrar.");
-				} else if(llista_matricules.contains(matricula)==false) {
-					llista_matricules.add(matricula);
-					plases_discapacitats.add(matricula);
+				} else if(llista_matricules.contains(m)==false) {
+					llista_matricules.add(m);
+					plases_discapacitats.add(m);
 					this.tipusPlaces = TipusPlacesParking.Discapacitat;
-					System.out.println("El cotxe amb matricula " + matricula + " ha entrat al parking.");
+					System.out.println("El cotxe amb matricula " + m + " ha entrat al parking.");
 				}
 			} else {
-				System.out.println("ALERTA =====> Matrícula " + matricula + "incorrecte.");
+				System.out.println("ALERTA =====> Matrícula " + m + " incorrecte.");
 			}
 		} catch (Exception w){
-			System.out.println("ALERTA =====> Parking per discapacitats ple.");
+			System.out.println("ALERTA =====> Parking per discapacitats ple. Ha ocupat plaça normal num: <num_plaça>");
 		}
 		return b;
 		
@@ -115,15 +118,15 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 		try {
 			if(matriculaOK == true) {
-				if(llista_matricules.contains(matricula)) {
-					System.out.println("El cotxe amb matricula " + matricula + " ha sortit del parking.");
-					plases_noDiscp.remove(matricula);
+				if(llista_matricules.contains(m)) {
+					System.out.println("El cotxe amb matricula " + m + " ha sortit del parking.");
+					plases_noDiscp.remove(m);
 					
-				} else if(llista_matricules.contains(matricula)==false) {
+				} else if(llista_matricules.contains(m)==false) {
 					System.out.println("El cotxe no és al parking.");
 				}
 			} else {
-				System.out.println("ALERTA =====> Matrícula " + matricula + "incorrecte.");
+				System.out.println("ALERTA =====> Matrícula " + m + " incorrecte.");
 			}
 		} catch (Exception w){
 			System.out.println("ALERTA =====> Parking per discapacitats ple.");
@@ -139,15 +142,15 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 		try {
 			if(matriculaOK == true) {
-				if(llista_matricules.contains(matricula)) {
-					plases_discapacitats.remove(matricula);
-					System.out.println("El cotxe amb matricula " + matricula + " ha sortit del parking.");
+				if(llista_matricules.contains(m)) {
+					plases_discapacitats.remove(m);
+					System.out.println("El cotxe amb matricula " + m + " ha sortit del parking.");
 					
-				} else if(llista_matricules.contains(matricula)==false) {
+				} else if(llista_matricules.contains(m)==false) {
 					System.out.println("El cotxe no és al parking.");
 				}
 			} else {
-				System.out.println("ALERTA =====> Matrícula " + matricula + "incorrecte.");
+				System.out.println("ALERTA =====> Matrícula " + m + " incorrecte.");
 			}
 		} catch (Exception w){
 			System.out.println("ALERTA =====> Parking per discapacitats ple.");
@@ -168,11 +171,11 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		this.tipusPlaces = tipusPlaces;
 	}
 	public int getPlacesOcupades(TipusPlacesParking tipus) {
-		return plases;
+		return plasesTotals;
 	}															
 	
 	public int getPlacesLliures(TipusPlacesParking tipus) {
-		return plases;
+		return plasesTotals;
 	}
 	
 	public void guardarMatricules(String path) throws Exception{

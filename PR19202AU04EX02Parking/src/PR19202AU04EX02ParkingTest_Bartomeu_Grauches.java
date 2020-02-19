@@ -29,8 +29,10 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 			
 				case 1:
 					System.out.println("-----------------------LLEGINT----MATICULES--------------------");
+					System.out.println("Escriu el path del txt de les matricules");
+					String filePathRead = scanner.next();
 					try {
-						objeto.llegirMatricules("");
+						objeto.llegirMatricules(filePathRead);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -89,7 +91,7 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 	}
 	
 	public static void main(String[] args) {
-		PR19202AU04EX02Parking_Bartomeu_Grauches parking = new PR19202AU04EX02Parking_Bartomeu_Grauches(20,10);
+		PR19202AU04EX02Parking_Bartomeu_Grauches parking = new PR19202AU04EX02Parking_Bartomeu_Grauches(4,2);
 		menu(parking);
 	}
 }
