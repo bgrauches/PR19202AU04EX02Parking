@@ -9,12 +9,13 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 	
 	private static int showMenu() {
 		System.out.println("Benvingut al parking, triï una opció teclejant el número:\n");
-		System.out.println("1 - Omplir parking a partir de fitxer*");
+		System.out.println("1 - Omplir parking a partir de fitxer");
 		System.out.println("2 - Entrar Cotxe");
 		System.out.println("3 - Entrar Cotxe Discapacitat");
 		System.out.println("4 - Surtir Cotxe");
 		System.out.println("5 - Surtir Cotxe Discapacitat");
-		System.out.println("6 - Sortir");
+		System.out.println("6 - Guardar llistat de matricules en fitxer");
+		System.out.println("7 - Sortir");
 		
 		int youChoose = scanner.nextInt();
 		return youChoose;
@@ -31,30 +32,49 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 					try {
 						objeto.llegirMatricules("");
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-						break;
+					break;
 
 				
 				case 2:
-					System.out.println("Entrar Cotxe");
+					try {
+						objeto.entraCotxe("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					break;
 					
 				case 3:
-					System.out.println("Entrar Cotxe Discapacitat");
+					try {
+						objeto.entraCotxeDiscapacitat("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					break;
 					
 				case 4:
-					System.out.println("Surtir Cotxe");
+					try {
+						objeto.surtCotxe("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					break;
 					
 				case 5:
-					System.out.println("Surtir Cotxe Discapacitat");
+					try {
+						objeto.surtCotxeDiscapacitats("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					break;
 					
 				case 6:
-					System.out.println("Guardar llistat de matricules en fitxer*");
+					try {
+						objeto.guardarMatricules("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					break;
 					
 				case 7:
