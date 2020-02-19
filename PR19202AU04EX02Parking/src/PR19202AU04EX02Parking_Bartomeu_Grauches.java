@@ -54,20 +54,11 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 	}
 	
-	private static void escriureMatricula() {
-		System.out.println("Escrigui la matricula del cotxe: ");
-		String m = escriu.next();
-		comporovarMatricula(m);
-	}
-	
-	private void enterGarrulo() {
-		
-	}
-	
 	public int entraCotxe(String matricula) throws Exception{ //afegeix 1 cotxe a les places
 		int a = 0;
-		
-		boolean matriculaOK = comporovarMatricula(matricula);
+		System.out.println("Escrigui la matricula del cotxe: ");
+		String m = escriu.next();
+		boolean matriculaOK = comporovarMatricula(m);
 		
 		try {
 			if(matriculaOK == true) {
@@ -92,7 +83,9 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 																												//RETURN PARKING?
 	public int entraCotxeDiscapacitat(String matricula) throws Exception{
 		int b = 0;
-		boolean matriculaOK = comporovarMatricula(matricula);
+		System.out.println("Escrigui la matricula del cotxe: ");
+		String m = escriu.next();
+		boolean matriculaOK = comporovarMatricula(m);
 		
 		try {
 			if(matriculaOK == true) {
@@ -116,7 +109,9 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 	
 	public void surtCotxe(String matricula) throws Exception{	//lleva 1 cotxe a les places
 
-		boolean matriculaOK = comporovarMatricula(matricula);
+		System.out.println("Escrigui la matricula del cotxe: ");
+		String m = escriu.next();
+		boolean matriculaOK = comporovarMatricula(m);
 		
 		try {
 			if(matriculaOK == true) {
@@ -138,7 +133,9 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 	
 	public void surtCotxeDiscapacitats(String matricula) throws Exception{	//lleva 1 cotxe a les places disc
 		
-		boolean matriculaOK = comporovarMatricula(matricula);
+		System.out.println("Escrigui la matricula del cotxe: ");
+		String m = escriu.next();
+		boolean matriculaOK = comporovarMatricula(m);
 		
 		try {
 			if(matriculaOK == true) {

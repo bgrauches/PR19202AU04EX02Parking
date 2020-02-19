@@ -91,9 +91,5 @@ public class PR19202AU04EX02ParkingTest_Bartomeu_Grauches {
 	public static void main(String[] args) {
 		PR19202AU04EX02Parking_Bartomeu_Grauches parking = new PR19202AU04EX02Parking_Bartomeu_Grauches(20,10);
 		menu(parking);
-		
-		
-		
 	}
-
 }
