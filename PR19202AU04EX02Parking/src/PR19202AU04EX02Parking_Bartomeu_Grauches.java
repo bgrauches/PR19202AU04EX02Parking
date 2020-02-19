@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class PR19202AU04EX02Parking_Bartomeu_Grauches {
@@ -11,11 +12,12 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 	static ArrayList<String> plases_noDiscp = new ArrayList<String>();
 	static ArrayList<String> plases_discapacitats = new ArrayList<String>();
 	
-	int totalArray = llista_matricules.size();
+	//int total de matricules
+	int totalPlases = llista_matricules.size();
 	
 	//numero de plaçes de discapacitats, no_discapacitats i total
-	int pNoDisc;
-	int pDisc;
+	int pNoDisc = plases_noDiscp.size();
+	int pDisc = plases_discapacitats.size();
 	int plasesTotals = pNoDisc + pDisc;
 	
 	//metode per comprovar si matricula donada es vàlida corresponent al patró [0-9]{4}[A-Z]{3}.
@@ -24,8 +26,11 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 			return matriculaOK;
 	}
 	
+	//metode per ficar de manera random un cotxe normal a plaça de discapacitat
 	private static void enterGarrulo() {
-		
+		Random rn = new Random();
+		int pDisc = (int)(Math.random()*7);
+		System.out.println("ALERTA =====> Garrulo detected!!! Ha aparcat a la plaça: <num_plaça>");
 	}
  
 	
@@ -40,7 +45,6 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(path));	
 			String linia;
-			//Mentres hi hagi linies, afegeix linies
 			while ((linia=bf.readLine()) != null) {
 				if(comporovarMatricula(linia)==false) {
 					System.out.println("ALERTA =====> Matrícula " + linia + " incorrecte.");
@@ -55,12 +59,14 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 	}
 	
-	
-	public int entraCotxe(String matricula) throws Exception{ //afegeix 1 cotxe a les places
+	//mètode mitjançant entra un cotxe no_discapaciat al parking en cas de que la matricula sigui correcta
+	public int entraCotxe(String matricula) throws Exception{
 		int a = 0;
 		System.out.println("Escrigui la matricula del cotxe: ");
 		String m = escriu.next();
 		boolean matriculaOK = comporovarMatricula(m);
+		
+		enterGarrulo(); //Garrulo peta sempre
 		
 		try {
 			if(matriculaOK == true) {
@@ -77,13 +83,15 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 				System.out.println("ALERTA =====> Matrícula " + m + " incorrecte.");
 			}
 		} catch (Exception w){
+			if(pDisc == plases_discapacitats.size()) {								//----------------??--------------------
 			System.out.println("ALERTA =====> Parking per no discapacitats ple.");
+			}
 		}
 		return a;
 		
 	}
 
-																												//RETURN PARKING?
+	//mètode mitjançant entra un cotxe discapaciat al parking en cas de que la matricula sigui correcta																						//RETURN PARKING?
 	public int entraCotxeDiscapacitat(String matricula) throws Exception{
 		int b = 0;
 		System.out.println("Escrigui la matricula del cotxe: ");
@@ -110,7 +118,8 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		
 	}
 	
-	public void surtCotxe(String matricula) throws Exception{	//lleva 1 cotxe a les places
+	//metode on treurem un cotxe no_discapacitat del parking en cas que la matricula sigui correcta
+	public void surtCotxe(String matricula) throws Exception{
 
 		System.out.println("Escrigui la matricula del cotxe: ");
 		String m = escriu.next();
@@ -134,6 +143,7 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		return;
 	}
 	
+	//metode on treurem un cotxe discapacitat del parking en cas que la matricula sigui correcta
 	public void surtCotxeDiscapacitats(String matricula) throws Exception{	//lleva 1 cotxe a les places disc
 		
 		System.out.println("Escrigui la matricula del cotxe: ");
@@ -178,6 +188,7 @@ public class PR19202AU04EX02Parking_Bartomeu_Grauches {
 		return plasesTotals;
 	}
 	
+	//mètode mitjançant el cual guardam els Strings de l'arraList llista_matricules a un fitxer txt definit per teclat
 	public void guardarMatricules(String path) throws Exception{
 		System.out.println("Escriu el path del txt on guardam les matricules");
 		String filePathWrite = escriu.next();
